@@ -16,7 +16,7 @@ const AdminLogin = () => {
   const addaduser = async (event) => {
     event.preventDefault();
     axios
-      .post("https://fsd-backend.glitch.me/admin/signin", {
+      .post("https://wbdservicet1.azurewebsites.net/admin/signin", {
         usnam: usnam,
         eml: eml,
       })

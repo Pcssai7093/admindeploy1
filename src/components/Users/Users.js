@@ -20,7 +20,7 @@ function Users({ menu_name }) {
   let search = useRef("");
   useEffect(() => {
     axios
-      .get("https://fsd-backend.glitch.me/admin/users")
+      .get("https://wbdservicet1.azurewebsites.net/admin/users")
       .then((result) => {
         setServices(result.data);
       })
@@ -38,7 +38,7 @@ function Users({ menu_name }) {
     };
     console.log(data);
     await axios
-      .post("https://fsd-backend.glitch.me/user/blockHandle", data)
+      .post("https://wbdservicet1.azurewebsites.net/user/blockHandle", data)
       .then((response) => {
         let status = response.data;
         if (status == true) {
@@ -60,7 +60,7 @@ function Users({ menu_name }) {
     console.log(filter);
 
     await axios
-      .post("https://fsd-backend.glitch.me/admin/user/filter", filter)
+      .post("https://wbdservicet1.azurewebsites.net/admin/user/filter", filter)
       .then((result) => {
         setServices((prev) => result.data);
       })
@@ -104,7 +104,8 @@ function Users({ menu_name }) {
               <option value="dsc">Descending</option>
             </select>
             <button
-              type="button" className="inp"
+              type="button"
+              className="inp"
               onClick={() => {
                 handleFilter();
               }}
@@ -168,7 +169,12 @@ function Users({ menu_name }) {
                   <td>
                     <div>
                       <span>
-                        <button className="inp" style={{backgroundColor: (data.isBlock === true ? "green" : "red")}}
+                        <button
+                          className="inp"
+                          style={{
+                            backgroundColor:
+                              data.isBlock === true ? "green" : "red",
+                          }}
                           onClick={() => {
                             handleBlockChange(data._id, data.isBlock);
                           }}
