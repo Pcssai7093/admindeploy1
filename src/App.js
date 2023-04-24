@@ -1,39 +1,48 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/home/Home";
 
-import SideBar from "./components/Sidebar";
-import sidebar_menu from "./constants/sidebar-menu";
-// import Seri
+import List from "./pages/list/List";
+import List2 from "./pages/list2/List2";
+import Single from "./pages/single/Single";
+import Single2 from "./pages/single2/Single2";
+import Queries from "./pages/Queries/Queries";
+import Login from "./pages/login/Login";
 
-import "./App.css";
-import AdminLogin from "./AdminLogin/AdminLogin";
-import Services from "./components/Services/Services";
-import Users from "./components/Users/Users";
+
+import New from "./pages/new/New";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { productInputs, userInputs } from "./formSource";
+import "./style/dark.scss";
+import { useContext } from "react";
+import { DarkModeContext } from "./context/darkModeContext";
+import AdminLogin from "./pages/adminLogin/AdminLogin";
 
 function App() {
+  const { darkMode } = useContext(DarkModeContext);
+
   return (
-    <Router>
-      <Routes>
-        <Route exact path="/" element={<AdminLogin />} />
-      </Routes>
-      <div className="dashboard-container">
-        <SideBar menu={sidebar_menu} />
+    <div className={darkMode ? "app dark" : "app"}>
+      <BrowserRouter>
+        <Routes>
+            <Route exact path="/" element={<AdminLogin />}/>
+            <Route exact path="/home" element={<Home />} />
+            <Route path="/users">
+              <Route index element={<List />} />
+              <Route path=":userId" element={<Single />} />
+              <Route path="new" element={<New inputs={userInputs} title="Add New User" />}/>
+            </Route>
+            <Route path="/products">
+              <Route index element={<List2 />} />
+              <Route path=":productId" element={<Single2 />} />
+              <Route path="new" element={<New inputs={productInputs} title="Add New Product" />}/>
+            </Route>
+            <Route path = "/queries">
+              <Route index element = {<Queries/>}/>
+            </Route>
 
-        <div className="dashboard-body">
-          <Routes>
-            {/* <Route exact path="/" element={<AdminLogin />} /> */}
-            <Route exact path="/users" element={<Users menu_name="Users" />} />
-            <Route
-              exact
-              path="/services"
-              element={<Services menu_name="Services" />}
-            />
-
-            <Route path="*" element={<div></div>} />
-          </Routes>
-        </div>
-      </div>
-    </Router>
+        </Routes>
+      </BrowserRouter>
+      {/* <Login/> */}
+    </div>
   );
 }
 
