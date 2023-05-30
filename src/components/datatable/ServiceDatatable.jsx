@@ -9,7 +9,7 @@ const ServiceDatatable = () => {
 const [users,setUsers] = useState({});
 const [render ,setRender] = useState(false);
   useEffect(()=>{
-  axios.get("https://wbdservicet1.azurewebsites.net/getServices")
+  axios.get(process.env.REACT_APP_SERVER_URL+"/getServices")
         .then((result)=>setUsers(result.data))
   },[render])
   console.log(users);
@@ -31,7 +31,7 @@ const [render ,setRender] = useState(false);
             <div
               className="deleteButton"
               onClick={() => {
-                axios.get(`https://wbdservicet1.azurewebsites.net/Blockservice/${fid}`).then(()=>{
+                axios.get(process.env.REACT_APP_SERVER_URL+`/Blockservice/${fid}`).then(()=>{
                   setRender((prev) => !prev)
                 })
 
@@ -42,7 +42,7 @@ const [render ,setRender] = useState(false);
             <div
               className="deleteButton"
               onClick={() => {
-                axios.get(`https://wbdservicet1.azurewebsites.net/UnBlockservice/${fid}`)
+                axios.get(process.env.REACT_APP_SERVER_URL+`/UnBlockservice/${fid}`)
                 .then(()=> {
                   setRender((prev) => !prev)
                 })
@@ -51,7 +51,7 @@ const [render ,setRender] = useState(false);
               UnBlock
             </div>
             <div className="deleteButton" onClick={()=>{
-                   axios.delete(`https://wbdservicet1.azurewebsites.net/deleteService/${fid}`).then(()=>{
+                   axios.delete(process.env.REACT_APP_SERVER_URL+`/deleteService/${fid}`).then(()=>{
                     setRender((prev) => !prev)
                   })
             }}>

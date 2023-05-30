@@ -20,7 +20,7 @@ const Single = () => {
 
   useEffect(() => {
     axios
-      .get(`https://wbdservicet1.azurewebsites.net/userservices/${userId}`)
+      .get(process.env.REACT_APP_SERVER_URL+`/userservices/${userId}`)
       .then((result) => {
         const gigs = result.data;
         // console.log(gigs["services"]);
@@ -32,7 +32,7 @@ const Single = () => {
   console.log(rrr)
 console.log("--------------------------------------------")
   useEffect(()=>{
-    axios.get(`https://wbdservicet1.azurewebsites.net/userDetails/${userId}`)
+    axios.get(process.env.REACT_APP_SERVER_URL+`/userDetails/${userId}`)
     .then((result)=> {
       setUsername(result.data.username)
       setEmail(result.data.email)
@@ -66,7 +66,7 @@ console.log("--------------------------------------------")
         <div className="cellAction">
           <div
             className="deleteButton" onClick={()=>{
-              axios.delete(`https://wbdservicet1.azurewebsites.net/deleteService/${fid}`).then(()=>{
+              axios.delete(process.env.REACT_APP_SERVER_URL+`/deleteService/${fid}`).then(()=>{
                setRender((prev) => !prev)
              })
      }}

@@ -11,7 +11,7 @@ const Queries = () => {
   const [queries, setQueries] = useState({});
   const [render ,setRender] = useState(false);
   useEffect(()=>{
-    axios.get("https://wbdservicet1.azurewebsites.net/userQueries")
+    axios.get(process.env.REACT_APP_SERVER_URL+"/userQueries")
           .then((result)=>setQueries(result.data))
 
     },[render])
@@ -94,7 +94,7 @@ const Queries = () => {
             </div>
 
             <div className="deleteButton" onClick={()=>{
-                     axios.delete(`https://wbdservicet1.azurewebsites.net/deleteQuery/${fid}`).then(()=>{
+                     axios.delete(process.env.REACT_APP_SERVER_URL+`/deleteQuery/${fid}`).then(()=>{
                       setRender((prev) => !prev)
                     })
             }}>

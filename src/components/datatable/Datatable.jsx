@@ -10,7 +10,7 @@ const[bad,setbad] = useState(false);
 const[render,Setrender] = useState(false);
 
   useEffect(()=>{
-  axios.get("https://wbdservicet1.azurewebsites.net/getUsers")
+  axios.get(process.env.REACT_APP_SERVER_URL+"/getUsers")
         .then((result)=>setUsers(result.data))
   },[render])
   // console.log(users);
@@ -75,7 +75,7 @@ const[render,Setrender] = useState(false);
             </Link>
             <div
               className="deleteButton" onClick={()=>{
-                axios.get(`https://wbdservicet1.azurewebsites.net/BlockUsers/${fid}`).then(()=>{
+                axios.get(process.env.REACT_APP_SERVER_URL+`/BlockUsers/${fid}`).then(()=>{
                   setbad(true)
                   Setrender((prev)=> !prev)
                                 })
@@ -88,7 +88,7 @@ const[render,Setrender] = useState(false);
               className="deleteButton"
 
               onClick={()=>{
-                axios.get(`https://wbdservicet1.azurewebsites.net/UnBlockUsers/${fid}`).then(()=>{
+                axios.get(process.env.REACT_APP_SERVER_URL+`/UnBlockUsers/${fid}`).then(()=>{
                   setbad(false)
                   Setrender((prev)=> !prev) 
 
@@ -98,7 +98,7 @@ const[render,Setrender] = useState(false);
               Unblock
             </div>
             <div className="deleteButton" onClick={()=>{
-                   axios.delete(`https://wbdservicet1.azurewebsites.net/deleteUser/${fid}`).then(()=>{
+                   axios.delete(process.env.REACT_APP_SERVER_URL+`/deleteUser/${fid}`).then(()=>{
                     Setrender((prev) => !prev)
                   })
             }}>

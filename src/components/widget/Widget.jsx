@@ -15,15 +15,15 @@ const [numberofusers,setNumberofusers] = useState(0);
 const [numberofservices,setnumberofservices] = useState(0);
 const [numberofqueries,setnumberofqueries] = useState(0);
 useEffect(()=>{
-axios.get("https://wbdservicet1.azurewebsites.net/getUsers")
+axios.get(process.env.REACT_APP_SERVER_URL+"/getUsers")
       .then((res)=> setNumberofusers(res.data.length))
 },[]);
 useEffect(()=>{
-axios.get("https://wbdservicet1.azurewebsites.net/getServices")
+axios.get(process.env.REACT_APP_SERVER_URL+"/getServices")
       .then((res)=> setnumberofservices(res.data.length))
 });
 useEffect(()=>{
-  axios.get("https://wbdservicet1.azurewebsites.net/userQueries")
+  axios.get(process.env.REACT_APP_SERVER_URL+"/userQueries")
         .then((res)=> setnumberofqueries(res.data.length))
   });
 

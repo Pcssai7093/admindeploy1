@@ -15,7 +15,7 @@ const Single2 = () => {
 
   useEffect(() => {
     axios
-      .get(`https://wbdservicet1.azurewebsites.net/userservices/${userId}`)
+      .get(process.env.REACT_APP_SERVER_URL+`/userservices/${userId}`)
       .then((result) => {
         const gigs = result.data;
         console.log(gigs["services"]);
